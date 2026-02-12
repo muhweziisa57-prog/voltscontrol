@@ -119,27 +119,52 @@
             </a>
         </div>
     </section>
+    <footer class="py-12 text-center text-gray-800">
+    © 2026 Volt Controls Engineering • Quality
+</footer>
 
-    <footer class="py-12 text-center text-gray-800 text-[10px] font-bold uppercase tracking-[0.8em]">
-        © 2026 Volt Controls Engineering • Quality • Affordability • Reliability
-    </footer>
-<div id="ai-interface" style="position:relative; width: 100%; background:#ffffff; color:#333; border-bottom:3px solid #0047AB; padding:10px; font-family: sans-serif; z-index:9999; box-sizing: border-box;">
-    <div style="max-width: 600px; margin: 0 auto;">
-        <div style="font-weight:bold; margin-bottom:8px; display:flex; justify-content:space-between; font-size:12px; color:#0047AB;">
-            <span>UNIT CONTROL AI | KAMPALA HQ</span>
-            <span style="color:#28a745; font-size:9px;">● SYSTEM ACTIVE</span>
+<div style="width: 100%; background:#ffffff; color:#333; border-top:3px solid #0047AB; padding:15px 10px; font-family: sans-serif; box-sizing: border-box; margin-top: 20px;">
+    <div style="max-width: 500px; margin: 0 auto;">
+        <div style="font-weight:bold; margin-bottom:5px; display:flex; justify-content:space-between; font-size:12px; color:#0047AB;">
+            <span>UNIT CONTROL AI | KAMPALA</span>
+            <span style="color:#28a745; font-size:9px;">● ACTIVE</span>
         </div>
-        
-        <div id="ai-log" style="height:80px; overflow-y:auto; margin-bottom:8px; font-size:11px; border:1px solid #ddd; padding:5px; background:#f9f9f9; border-radius:4px; color:#444;">
-            System initialized. Ready for commands.
+        <div id="ai-log" style="height:100px; overflow-y:auto; margin-bottom:8px; font-size:11px; border:1px solid #ddd; padding:5px; background:#f9f9f9; border-radius:4px; color:#444;">
+            System: Connected. Ready.
         </div>
-
-        <div style="display:flex; gap:8px; align-items: center;">
-            <input type="text" id="ai-input" placeholder="Ask about process or manager..." style="flex-grow: 1; background:#fff; color:#333; border:1px solid #ccc; padding:8px; font-size:12px; border-radius:4px;">
-            <button onclick="sendToAI()" style="background:#0047AB; color:#fff; border:none; font-weight:bold; padding:8px 15px; cursor:pointer; font-size:12px; border-radius:4px;">SEND</button>
-            <a href="https://wa.me/256703679826" style="background:#25D366; color:#fff; text-decoration:none; font-size:11px; padding:8px; border-radius:4px; font-weight:bold;">WHATSAPP</a>
+        <div style="display:flex; gap:5px;">
+            <input type="text" id="ai-input" placeholder="Ask about units..." style="flex:1; border:1px solid #ccc; padding:8px; font-size:14px; border-radius:4px;">
+            <button id="send-btn" style="background:#0047AB; color:#fff; border:none; padding:8px 12px; font-weight:bold; border-radius:4px;">SEND</button>
+            <a href="https://wa.me/256703679826" style="background:#25D366; color:#fff; text-decoration:none; padding:8px; border-radius:4px; font-size:12px; font-weight:bold;">WA</a>
         </div>
     </div>
 </div>
+
+<script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+    const genAI = new GoogleGenerativeAI("AIzaSyBnzThOyGNgEHL8hg-fAgpNOs0MUQ");
+    const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash",
+        systemInstruction: "You are the Kampala Control Room AI. Location: Kampala. Contacts: 0703679826 or 0781100200. Prices: Negotiated with Manager. Process: High-sensitivity GPS, 3-day backup battery, encrypted GSM tunnels."
+    });
+
+    const input = document.getElementById("ai-input");
+    const log = document.getElementById("ai-log");
+    const btn = document.getElementById("send-btn");
+
+    btn.onclick = async () => {
+        const text = input.value;
+        if (!text) return;
+        log.innerHTML += `<div style="color:#888; margin-top:5px;">> ${text}</div>`;
+        input.value = "";
+        try {
+            const result = await model.generateContent(text);
+            log.innerHTML += `<div style="color:#0047AB; margin-bottom:10px; font-weight:bold;">> ${result.response.text()}</div>`;
+        } catch (e) {
+            log.innerHTML += `<div style="color:red;">> Connection Error.</div>`;
+        }
+        log.scrollTop = log.scrollHeight;
+    };
+</script>
 </body>
 </html>
