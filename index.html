@@ -123,46 +123,23 @@
     <footer class="py-12 text-center text-gray-800 text-[10px] font-bold uppercase tracking-[0.8em]">
         © 2026 Volt Controls Engineering • Quality • Affordability • Reliability
     </footer>
-<div id="ai-interface" style="position:fixed; bottom:15px; right:15px; width:280px; background:#000; color:#0f0; border:2px solid #0f0; padding:15px; font-family:monospace; z-index:9999; border-radius:8px; box-shadow: 0 0 15px #0f0;">
-    <div style="font-weight:bold; border-bottom:1px solid #0f0; margin-bottom:10px; display:flex; justify-content:space-between;">
-        <span>UNIT_CONTROL_AI</span>
-        <span style="color:red; font-size:10px;">● ONLINE</span>
-    </div>
-    
-    <div id="ai-log" style="height:150px; overflow-y:auto; margin-bottom:10px; font-size:11px; border:1px solid #222; padding:5px; background:#050505;">
-        System: Ready for Detective.<br>Location: Kampala HQ.
-    </div>
+<div id="ai-interface" style="position:relative; width: 100%; background:#ffffff; color:#333; border-bottom:3px solid #0047AB; padding:10px; font-family: sans-serif; z-index:9999; box-sizing: border-box;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div style="font-weight:bold; margin-bottom:8px; display:flex; justify-content:space-between; font-size:12px; color:#0047AB;">
+            <span>UNIT CONTROL AI | KAMPALA HQ</span>
+            <span style="color:#28a745; font-size:9px;">● SYSTEM ACTIVE</span>
+        </div>
+        
+        <div id="ai-log" style="height:80px; overflow-y:auto; margin-bottom:8px; font-size:11px; border:1px solid #ddd; padding:5px; background:#f9f9f9; border-radius:4px; color:#444;">
+            System initialized. Ready for commands.
+        </div>
 
-    <div style="margin-bottom:10px;">
-        <a href="https://wa.me/256703679826" style="display:block; background:#25D366; color:#fff; text-decoration:none; font-size:12px; padding:8px; text-align:center; border-radius:4px; font-weight:bold;">CHAT ON WHATSAPP</a>
+        <div style="display:flex; gap:8px; align-items: center;">
+            <input type="text" id="ai-input" placeholder="Ask about process or manager..." style="flex-grow: 1; background:#fff; color:#333; border:1px solid #ccc; padding:8px; font-size:12px; border-radius:4px;">
+            <button onclick="sendToAI()" style="background:#0047AB; color:#fff; border:none; font-weight:bold; padding:8px 15px; cursor:pointer; font-size:12px; border-radius:4px;">SEND</button>
+            <a href="https://wa.me/256703679826" style="background:#25D366; color:#fff; text-decoration:none; font-size:11px; padding:8px; border-radius:4px; font-weight:bold;">WHATSAPP</a>
+        </div>
     </div>
-
-    <input type="text" id="ai-input" placeholder="Ask about process..." style="width:70%; background:#111; color:#0f0; border:1px solid #0f0; padding:5px;">
-    <button onclick="sendToAI()" style="background:#0f0; color:#000; border:none; font-weight:bold; width:25%; cursor:pointer;">GO</button>
 </div>
-
-<script type="module">
-  import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-  const KEY = "AIzaSyBnzThOyGNgEHL8hg-fAgpNOs0MUQ"; 
-
-  const genAI = new GoogleGenerativeAI(KEY);
-  const model = genAI.getGenerativeModel({ 
-    model: "gemini-1.5-flash",
-    systemInstruction: "You are the Kampala Control Room AI. Location: Kampala, Uganda. Contacts: 0703679826 or 0781100200. PROCESS: We build units with high-sensitivity GPS, hardwired 3-day backup batteries, and encrypted GSM data tunnels (10-second updates). PRICES: Negotiated with the Manager. Tone: Professional and high-tech."
-  });
-
-  window.sendToAI = async () => {
-    const input = document.getElementById("ai-input");
-    const log = document.getElementById("ai-log");
-    if (!input.value) return;
-
-    log.innerHTML += `<div style="color:#888;">> ${input.value}</div>`;
-    const result = await model.generateContent(input.value);
-    log.innerHTML += `<div style="color:#0ff; margin-bottom:8px;">> ${result.response.text()}</div>`;
-    input.value = "";
-    log.scrollTop = log.scrollHeight;
-  };
-</script>
 </body>
 </html>
