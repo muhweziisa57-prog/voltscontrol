@@ -19,9 +19,27 @@
     <style>
         .power-pulse { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); } 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); } }
-        .masonry-item { transition: all 0.5s ease; border: 1px solid rgba(255,255,255,0.05); }
+        .masonry-item { transition: all 0.5s ease; border: 1px solid rgba(255,255,255,0.05); position: relative; }
         .masonry-item:hover { transform: translateY(-8px); border-color: #dc2626; background: rgba(220,38,38,0.05); }
         .fb-comments, .fb-comments span, .fb-comments iframe { width: 100% !important; background: #fff; border-radius: 25px; padding: 15px; }
+        
+        /* Overlay styling for tags */
+        .video-tag {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none; /* Allows clicking through to the video player */
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="bg-[#020202] text-white font-sans selection:bg-red-600">
@@ -56,79 +74,137 @@
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto py-12 px-6 border-x border-white/5">
+    <!-- NEW DESCRIPTION SECTION (WHAT WE DO, HOW IT WORKS & WHERE IT IS USED) -->
+    <section class="max-w-7xl mx-auto py-16 px-6 border-x border-t border-white/5 bg-zinc-950/20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            
+            <!-- Column 1: What We Do -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-red-600/10 text-red-600 rounded-lg flex items-center justify-center"><i class="fas fa-tools"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight">What We Do</h3>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    At Volt Controls, we design and build heavy-duty **Industrial Electrical Control Panels**, **Automatic Changeover Switches (ATS)**, and tailored automation systems. We assemble precision power distributions using top-grade contactors, timers, and relays to keep machinery running smoothly.
+                </p>
+            </div>
+
+            <!-- Column 2: How It Is Used -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-red-600/10 text-red-600 rounded-lg flex items-center justify-center"><i class="fas fa-bolt"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight">How It Works</h3>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Our smart systems remove the human error from power management. When the main grid cuts out, our controllers instantly detect the failure, safely ignite backup generators, and seamlessly swap over the loads without blowing components or risking electrical accidents.
+                </p>
+            </div>
+
+            <!-- Column 3: Where It Is Used -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-red-600/10 text-red-600 rounded-lg flex items-center justify-center"><i class="fas fa-industry"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight">Where It's Applied</h3>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Our systems protect critical setups across East Africa—operating in **industrial manufacturing factories**, commercial office hubs, residential apartments, large-scale milling workshops, and agricultural pump systems where uninterrupted power is non-negotiable.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto py-12 px-6 border-x border-t border-white/5">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:auto-rows-[250px]">
             <!-- Video 1 -->
             <div class="md:col-span-2 md:row-span-2 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/40 power-pulse">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SfBnL0gmYfQ" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 2 -->
             <div class="md:col-span-1 md:row-span-2 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9Eue9gNMkXY" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 4 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QdOahUnCLlk" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
             <!-- Video 5 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/NB9apiPOv9U" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 3 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/TeYWepgskco" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 6 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dBVwoQZh9YE" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
             <!-- Video 7 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/AkAVCPCc38g" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 8 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/8YXsRJrness" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 9 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/XU75UuTGJBY" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
             <!-- Video 10 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Yeixx_Oa5FA" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 11 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/k5HHxCDBoqs" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 12 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/XdYa-tSPyLo" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
             <!-- Video 13 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/D7qrWrJwV4Q" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 14 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/D-mOg-DCIMA" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 15 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/6s--20wBF4w" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
             <!-- Video 16 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/h2RszjDl2qk" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>voltcontrols</div>
             </div>
             <!-- Video 17 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CYe3xw9iORs" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>ats_electrical</div>
             </div>
             <!-- Video 18 -->
             <div class="md:col-span-1 masonry-item p-2 rounded-[2.5rem] bg-zinc-900/20">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/wrzOzoxX1tA" frameborder="0" allowfullscreen class="rounded-[2rem]"></iframe>
+                <div class="video-tag"><span class="text-red-500">#</span>engineering</div>
             </div>
         </div>
     </section>
